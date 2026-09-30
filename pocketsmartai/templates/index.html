@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="badge">GEN AI POWERED</span>
+    <h1>Plan smarter.<br><span>Spend better.</span></h1>
+    <p>Budget-aware recommendations for home interiors, parties and jewelry.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#planners">Start Planning</a>
+      <a class="btn secondary" href="/register">Create Account</a>
+    </div>
+  </div>
+</section>
+
+<section id="planners" class="section">
+  <h2>Choose your planner</h2>
+  <div class="planner-grid">
+    <article class="planner-card" onclick="showPlanner('home')">
+      <div class="icon">🏠</div><h3>Home Interior</h3><p>Furniture, lighting and decor within your budget.</p>
+    </article>
+    <article class="planner-card" onclick="showPlanner('party')">
+      <div class="icon">🎉</div><h3>Party Planner</h3><p>Food, venue and decoration budget allocation.</p>
+    </article>
+    <article class="planner-card" onclick="showPlanner('jewelry')">
+      <div class="icon">💎</div><h3>Jewelry Planner</h3><p>Occasion and outfit-aware jewelry suggestions.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section planner-panel" id="home-panel">
+  <h2>🏠 Home Interior Budget Planner</h2>
+  <form onsubmit="submitHome(event)">
+    <div class="form-grid">
+      <label>Budget <input name="budget" type="number" min="1" required placeholder="e.g. 50000"></label>
+      <label>Room <select name="room"><option>Living Room</option><option>Bedroom</option><option>Kitchen</option></select></label>
+      <label>Style <select name="style"><option>Modern</option><option>Minimal</option><option>Traditional</option><option>Luxury</option></select></label>
+      <label>Items / requirements <input name="items" value="lights, curtains, decor, furniture"></label>
+    </div>
+    <button class="btn">Generate Home Recommendations</button>
+  </form>
+</section>
+
+<section class="section planner-panel" id="party-panel">
+  <h2>🎉 Party Budget Planner</h2>
+  <form onsubmit="submitParty(event)">
+    <div class="form-grid">
+      <label>Budget <input name="budget" type="number" min="1" required placeholder="e.g. 25000"></label>
+      <label>Event type <select name="event_type"><option>Birthday</option><option>Wedding</option><option>Corporate</option><option>Get-together</option></select></label>
+      <label>Guests <input name="guests" type="number" min="1" value="20"></label>
+      <label>Venue preference <input name="venue" value="Home or affordable hall"></label>
+      <label>Food preference <input name="food" value="Mixed"></label>
+      <label>Decoration <input name="decoration" value="Simple"></label>
+    </div>
+    <button class="btn">Generate Party Recommendations</button>
+  </form>
+</section>
+
+<section class="section planner-panel" id="jewelry-panel">
+  <h2>💎 Jewelry Budget Planner</h2>
+  <form onsubmit="submitJewelry(event)" enctype="multipart/form-data">
+    <div class="form-grid">
+      <label>Budget <input name="budget" type="number" min="1" required placeholder="e.g. 10000"></label>
+      <label>Occasion <select name="occasion"><option>Wedding</option><option>Party</option><option>Office</option><option>Festival</option></select></label>
+      <label>Style <select name="style"><option>Elegant</option><option>Traditional</option><option>Minimal</option><option>Trendy</option></select></label>
+      <label>Outfit / color notes <input name="outfit_notes" placeholder="e.g. blue saree with gold border"></label>
+      <label>Optional outfit image <input name="image" type="file" accept="image/*"></label>
+    </div>
+    <button class="btn">Generate Jewelry Recommendations</button>
+  </form>
+</section>
+
+<section class="section">
+  <div id="loading" class="loading hidden">Thinking…</div>
+  <div id="results"></div>
+</section>
+{% endblock %}
